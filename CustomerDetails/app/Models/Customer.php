@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Contact;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model

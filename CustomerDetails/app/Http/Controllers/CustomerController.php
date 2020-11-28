@@ -19,7 +19,7 @@ class CustomerController extends Controller {
         return view('create');
     }
     public function store(Request $request) {
-        
+        // dd($request->all());
         $validation = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -28,16 +28,25 @@ class CustomerController extends Controller {
             'dob' => 'required',
             'city' => 'required',
             'state' => 'required',
-            'zip_code' => 'required',
-            // 'contact_no_1' => 'min:10|max:10',
+            'zip_code' => 'required'
         ]);
         if($validation->fails()){
             return redirect()->route('customerCreate')->with('errors', $validation->errors());
         } else {
             $data = $request->all();
+            $mobile = $data['mobile'];
+            $phone = $data['phone'];
             $data['f_name'] = $request['first_name'];
             $data['l_name'] = $request['last_name'];
             $newCustomer = $this->customerModel->create($data);
+            foreach ($mobile as $key => $value) {
+                if($value!= null && $phone[$key]!=null){
+                    $newCustomer->contacts()->insert([
+                        "customer_id" => $newCustomer->id, "mobile" => $value, "phone" => $phone[$key]
+                    ]);
+                }
+            }
+            
             if(isset($newCustomer)){
                 return redirect()->route('customerIndex')->with('success', 'Customer added successfuly..');
             } else {
@@ -51,9 +60,7 @@ class CustomerController extends Controller {
         $customer = $this->customerModel->find($customer_id);
         if(isset($customer)){
             $customer['dob'] = date('Y-m-d', strtotime($customer['dob']));
-            // dd($customer['dob']);
-            return view('edit', array("customer" => $customer));
-
+            return view('edit', array("customer" => $customer, "contacts" => $customer->contacts));
         } else {
             return redirect()->route('customerIndex')->with('warning', 'Customer not found..');
         }

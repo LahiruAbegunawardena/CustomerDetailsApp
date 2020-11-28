@@ -11,7 +11,7 @@ class Contact extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        'phone', 'mobile', 'customer_id'
+        'customer_id', 'phone', 'mobile'
     ];
 
     /**
@@ -20,4 +20,9 @@ class Contact extends Model
      * @var array
      */
     protected $hidden = ["created_at", "updated_at"];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }

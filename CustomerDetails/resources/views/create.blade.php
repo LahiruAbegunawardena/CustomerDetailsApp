@@ -83,6 +83,31 @@
                       </div>
                     </div>
 
+                    <div class="row">
+                      <label class="col-md-10">Contact Details</label>
+                      <a class="btn btn-primary" onclick="addContact()">Add</a>
+
+                    </div>
+                    
+                    <div class="contact-det-par">
+                      <div class="row contact-det">
+                        <div class="form-group col-md-6">
+                          <label for="phone[]">Phone No</label>
+                          {!! Form::text('phone[]', null, array('class' => 'form-control')) !!}
+                          @if ($errors->has('phone[]'))
+                            <p class="error">{{ $errors->first('phone[]') }}</p>
+                          @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="mobile[]">Mobile No</label>
+                          {!! Form::text('mobile[]', null, array('class' => 'form-control')) !!}
+                          @if ($errors->has('mobile[]'))
+                            <p class="error">{{ $errors->first('mobile[]') }}</p>
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Save</button>
 
                   {{ Form::close() }}

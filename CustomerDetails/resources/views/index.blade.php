@@ -45,8 +45,16 @@
                       <td>{{$customer->email}}</td>
                       <td>{{$customer->address}}</td>
                       <td>{{$customer->city}}/ {{$customer->state}}</td>
-                      <td></td>
-                      <td></td>
+                      <td>
+                        @foreach ($customer->contacts as $item)
+                          {{$item->mobile}}
+                        @endforeach
+                      </td>
+                      <td>
+                        @foreach ($customer->contacts as $item)
+                          {{$item->phone}}
+                        @endforeach
+                      </td>
                       <td>
                         <a href="{{url('customer/'.$customer->id.'/edit')}}" class="btn btn-info btn-sm"> Edit </a>
                       </td>
