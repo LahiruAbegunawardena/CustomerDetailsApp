@@ -85,7 +85,7 @@
 
                     <div class="row">
                       <label class="col-md-10">Contact Details</label>
-                      <a class="btn btn-primary" onclick="addContact()">Add</a>
+                      <a class="btn btn-primary" onclick="addContact()" title="Click here to add more contact fields">Add Contacts</a>
 
                     </div>
                     

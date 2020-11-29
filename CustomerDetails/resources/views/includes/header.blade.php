@@ -38,10 +38,9 @@
     <script type="text/javascript">
       function addContact() {
         component1 = $(".contact-det").clone();
+        component1.show();
         ndCount = $(".contact-det-par").length;
         component1.removeClass("contact-det").addClass("contact-det-"+ ndCount);
-        // console.log(component1);
-        // console.log(ndCount);
         $(".contact-det-par").append(component1);
       }
     </script>

@@ -83,6 +83,53 @@
                       </div>
                     </div>
 
+                    <div class="row">
+                      <label class="col-md-10">Contact Details</label>
+                      <a class="btn btn-primary" onclick="addContact()" title="Click here to add more contact fields">Add Contacts</a>
+                    </div>
+                    
+                    <div class="contact-det-par">
+                      @if (count($contacts) == 0)
+                        {{-- If there is no previously added contact fields --}}
+                        <div class="row contact-det" style="display: none">
+                          <div class="form-group col-md-6">
+                            <label for="phone[]">Phone No</label>
+                            {!! Form::text('phone[]', null, array('class' => 'form-control')) !!}
+                            @if ($errors->has('phone[]'))
+                              <p class="error">{{ $errors->first('phone[]') }}</p>
+                            @endif
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="mobile[]">Mobile No</label>
+                            {!! Form::text('mobile[]', null, array('class' => 'form-control')) !!}
+                            @if ($errors->has('mobile[]'))
+                              <p class="error">{{ $errors->first('mobile[]') }}</p>
+                            @endif
+                          </div>
+                        </div>    
+                      @endif
+
+                      <?php $class = "contact-det";?>
+                      @foreach ($contacts as $key => $contact)
+                        @if ($key != 0) <?php $class = "contact-det-".$key; ?> @endif
+                        <div class="row {{$class}}">
+                          <div class="form-group col-md-6">
+                            <label for="phone[]">Phone No</label>
+                            {!! Form::text('phone[]', $contact->phone, array('class' => 'form-control')) !!}
+                            @if ($errors->has('phone[]'))
+                              <p class="error">{{ $errors->first('phone[]') }}</p>
+                            @endif
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="mobile[]">Mobile No</label>
+                            {!! Form::text('mobile[]', $contact->mobile, array('class' => 'form-control')) !!}
+                            @if ($errors->has('mobile[]'))
+                              <p class="error">{{ $errors->first('mobile[]') }}</p>
+                            @endif
+                          </div>
+                        </div>
+                      @endforeach
+                    </div>
                     <button type="submit" class="btn btn-primary">Update</button>
 
                   {{ Form::close() }}
